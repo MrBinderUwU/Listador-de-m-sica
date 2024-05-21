@@ -1,0 +1,1 @@
+O programa não é 100% eficaz, alguns tipos de arquivos dentro da pasta pode dar erro no código.
