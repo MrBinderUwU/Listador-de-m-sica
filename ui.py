@@ -5,17 +5,22 @@ import tkinter as tk
 import os
 
 def abrir_pasta():
-    folder_path = filedialog.askdirectory()  # Open a folder selection dialog
+    folder_path = filedialog.askdirectory()
     if folder_path:
         tela_seleção(root, folder_path)
 
-def procurar_lista(entry, lista):
-    pass
+def procurar_lista(entry_musica, lista):
+    pesquisado = entry_musica.get()
+    lista.delete(0, tk.END) 
+    for i in arquivos_salvos:
+        if pesquisado.lower() in i.lower():
+            lista.insert(tk.END, i)
+    
 
 def carregar_lista(lista):
-    lista.delete(0, tk.END)  # Clear the Listbox
-    for item in arquivos_salvos:
-        lista.insert(tk.END, item)  # Insert folder contents into Listbox
+    lista.delete(0, tk.END)
+    for i in arquivos_salvos:
+        lista.insert(tk.END, i)
 
 #####################################
 
@@ -24,7 +29,7 @@ def tela_inicial(root):
     label.pack(padx=5, pady=25, anchor=tk.CENTER)
     texto = tk.Label(root, text="Um pequeno programa que lista \n todas as suas músicas dentro de uma pasta.", font=(25))
     texto.pack()
-    texto2= tk.Label(root, text="Funciona apenas com arquivos '.ogg' e '.mp4'.", font=(25))
+    texto2= tk.Label(root, text="Funciona apenas com arquivos '.ogg', '.mp4' e '.mp3'", font=(25))
     texto2.pack(pady=30)
     button_abrir_pasta = tk.Button(root, text="Abrir Pasta", font=(40) ,command=lambda:abrir_pasta())
     button_abrir_pasta.pack(padx=5, pady=110, anchor=tk.CENTER)
@@ -35,7 +40,7 @@ def tela_seleção(root, folder_path):
         widget.destroy()
     label = Label(root, text='Listador de Músicas' ,font=('Rosewood Std Regular', 30))
     label.pack(padx=5, pady=5, anchor=tk.CENTER)
-    lista = tk.Listbox(root, selectmode=tk.SINGLE, height= 20, width= 40)
+    lista = tk.Listbox(root, selectmode=tk.SINGLE, height= 20, width= 50)
     lista.pack(pady=10)
     entry_texto = tk.Label(root, text="Digite o nome da música")
     entry_texto.pack(pady=10)
@@ -49,7 +54,7 @@ def tela_seleção(root, folder_path):
     carregar_lista(lista)
 
 root = tk.Tk()
-root.title("Listador de Arquivos")
+root.title("Listador de Música")
 root.geometry("600x600")
 tela_inicial(root)
 root.mainloop()
