@@ -3,7 +3,6 @@ import os
 #lista_musica = []
 
 arquivos_salvos = []
-tipos_arquivos = []
 
 def nomear_arquivos(pasta):
     lista_arquivos = os.listdir(pasta)
